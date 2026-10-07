@@ -1,0 +1,33 @@
+{
+  "name": "all-tools-site",
+  "version": "1.0.0",
+  "description": "Modern multi-tool SaaS platform featuring creator, developer, and utility tools",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "tools",
+    "creator-tools",
+    "developer-tools",
+    "youtube-tools",
+    "utilities",
+    "saas"
+  ],
+  "author": "All Tools Platform",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.22.3",
+    "express-rate-limit": "^7.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

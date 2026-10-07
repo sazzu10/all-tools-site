@@ -1,0 +1,54 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><%= (typeof title !== 'undefined' && title) ? title : 'All Tools • Free Online Utilities & Creator Tools' %></title>
+<meta name="description" content="<%= (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : 'Free online utilities, AI writing assistants, developer tools, and creator generators. Fast, private, and 100% free.' %>">
+<% if (typeof keywords !== 'undefined' && keywords && keywords.length) { %>
+<meta name="keywords" content="<%= Array.isArray(keywords) ? keywords.join(', ') : keywords %>">
+<% } %>
+
+<!-- Canonical URL -->
+<link rel="canonical" href="<%= (typeof canonicalUrl !== 'undefined' && canonicalUrl) ? canonicalUrl : 'http://localhost:4000' + (typeof currentPath !== 'undefined' ? currentPath : '') %>">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="<%= (typeof title !== 'undefined' && title) ? title : 'All Tools • Free Online Utilities' %>">
+<meta property="og:description" content="<%= (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : 'Free online utilities and creator tools.' %>">
+<meta property="og:site_name" content="All Tools">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<%= (typeof title !== 'undefined' && title) ? title : 'All Tools' %>">
+<meta name="twitter:description" content="<%= (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : 'Free online utilities and creator tools.' %>">
+
+<!-- Tailwind CSS & FontAwesome -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          brand: {
+            50: '#eef2ff',
+            100: '#e0e7ff',
+            500: '#6366f1',
+            600: '#4f46e5',
+            700: '#4338ca',
+            900: '#312e81',
+            950: '#1e1b4b'
+          }
+        }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="/css/app.css">
+<script src="/js/theme.js"></script>
+
+<!-- Structured Data (JSON-LD) -->
+<% if (typeof schemaData !== 'undefined' && schemaData) { %>
+<script type="application/ld+json">
+<%- JSON.stringify(schemaData) %>
+</script>
+<% } %>

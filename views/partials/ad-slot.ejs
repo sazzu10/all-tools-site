@@ -1,0 +1,26 @@
+<%
+  const slotId = typeof id !== 'undefined' ? id : 'ad-slot-default';
+  const slotFormat = typeof format !== 'undefined' ? format : 'banner';
+  const slotLabel = typeof label !== 'undefined' ? label : 'Sponsored';
+  const customClass = typeof className !== 'undefined' ? className : '';
+
+  let minHeight = '90px';
+  if (slotFormat === 'rectangle') minHeight = '250px';
+  if (slotFormat === 'small') minHeight = '60px';
+  if (slotFormat === 'tall') minHeight = '300px';
+%>
+
+<!-- Reusable Ad Slot Container (CLS Protected with Fixed Min-Height & Viewport Containment) -->
+<div 
+  class="my-6 ad-slot-container max-w-5xl mx-auto w-full rounded-2xl border border-slate-800/40 bg-slate-900/15 overflow-hidden transition-all <%= customClass %>" 
+  style="min-height: <%= minHeight %>;" 
+  data-ad-slot="<%= slotId %>"
+  aria-label="<%= slotLabel %>"
+>
+  <div class="w-full h-full flex flex-col items-center justify-center p-3 text-center" style="min-height: <%= minHeight %>;">
+    <div class="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-wider text-slate-500/80">
+      <i class="fa-solid fa-rectangle-ad text-[10px] text-slate-500/80"></i>
+      <span><%= slotLabel %></span>
+    </div>
+  </div>
+</div>

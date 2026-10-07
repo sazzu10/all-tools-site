@@ -1,0 +1,133 @@
+<div class="max-w-4xl mx-auto space-y-8 py-4 sm:py-6">
+
+  <!-- Breadcrumbs -->
+  <nav class="flex items-center gap-2 text-xs text-slate-400">
+    <a href="/" class="hover:text-white transition-colors">Home</a>
+    <i class="fa-solid fa-chevron-right text-[10px] text-slate-600"></i>
+    <span class="text-slate-200 font-semibold">Contact Us</span>
+  </nav>
+
+  <!-- Header Card -->
+  <div class="p-6 sm:p-8 rounded-3xl glass-panel border border-slate-800 space-y-3">
+    <div class="flex items-center gap-3.5">
+      <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-600 to-blue-600 text-white flex items-center justify-center text-xl shadow-lg shadow-cyan-600/25 shrink-0">
+        <i class="fa-solid fa-paper-plane"></i>
+      </div>
+      <div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Contact & Support</h1>
+        <p class="text-xs text-slate-400 mt-0.5">We typically respond to inquiries within 24 to 48 business hours</p>
+      </div>
+    </div>
+    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-3xl pt-2">
+      Have a feature request, encountered a bug, or interested in advertising / sponsorship partnerships? We would love to hear from you.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <!-- Contact Info Cards -->
+    <div class="space-y-4 lg:col-span-1">
+      <div class="p-5 rounded-2xl glass-panel border border-slate-800 space-y-2">
+        <div class="flex items-center gap-2.5 text-indigo-400 font-bold text-xs uppercase tracking-wider">
+          <i class="fa-solid fa-envelope"></i>
+          <span>Direct Email</span>
+        </div>
+        <p class="text-xs text-slate-300">General & Support:</p>
+        <p class="font-mono text-xs text-indigo-300 select-all">support@all-tools.online</p>
+        <p class="text-xs text-slate-300 pt-2">Business & Sponsorships:</p>
+        <p class="font-mono text-xs text-indigo-300 select-all">partners@all-tools.online</p>
+      </div>
+
+      <div class="p-5 rounded-2xl glass-panel border border-slate-800 space-y-2">
+        <div class="flex items-center gap-2.5 text-emerald-400 font-bold text-xs uppercase tracking-wider">
+          <i class="fa-solid fa-bug"></i>
+          <span>Bug Reports</span>
+        </div>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          Please include the specific tool name, input payload, and browser version when submitting bug reports to help us reproduce and fix issues rapidly.
+        </p>
+      </div>
+
+      <div class="p-5 rounded-2xl glass-panel border border-slate-800 space-y-2">
+        <div class="flex items-center gap-2.5 text-purple-400 font-bold text-xs uppercase tracking-wider">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Security & Privacy</span>
+        </div>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          For responsible disclosure of security vulnerabilities or privacy inquiries, contact our engineering team directly at <span class="font-mono text-purple-300 text-xs">security@all-tools.online</span>.
+        </p>
+      </div>
+    </div>
+
+    <!-- Interactive Contact Form -->
+    <div class="p-6 sm:p-8 rounded-3xl glass-panel border border-slate-800 space-y-5 lg:col-span-2">
+      <div class="border-b border-slate-800 pb-3">
+        <h2 class="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-message text-indigo-400"></i> Send Us a Message
+        </h2>
+        <p class="text-xs text-slate-400 mt-1">Fill out the form below and we will get back to you shortly.</p>
+      </div>
+
+      <form id="contact-form" onsubmit="event.preventDefault(); window.showToast('Thank you! Your message has been received.', 'success'); this.reset();" class="space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="space-y-1.5">
+            <label class="block text-xs font-semibold text-slate-300">Your Name <span class="text-rose-400">*</span></label>
+            <input 
+              type="text" 
+              name="name" 
+              required
+              placeholder="Alex Smith" 
+              class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
+            >
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="block text-xs font-semibold text-slate-300">Email Address <span class="text-rose-400">*</span></label>
+            <input 
+              type="email" 
+              name="email" 
+              required
+              placeholder="alex@example.com" 
+              class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
+            >
+          </div>
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="block text-xs font-semibold text-slate-300">Topic / Category</label>
+          <select 
+            name="category"
+            class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-indigo-500 transition-all cursor-pointer"
+          >
+            <option value="feedback">General Feedback & Suggestions</option>
+            <option value="bug">Report a Bug / Tool Malfunction</option>
+            <option value="feature">Request a New Tool</option>
+            <option value="advertising">Advertising & Partnerships</option>
+            <option value="privacy">Privacy & Legal Inquiry</option>
+          </select>
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="block text-xs font-semibold text-slate-300">Message <span class="text-rose-400">*</span></label>
+          <textarea 
+            name="message" 
+            rows="5" 
+            required
+            placeholder="Tell us what's on your mind, how we can help, or which tool you'd like to see next..."
+            class="w-full bg-slate-900 border border-slate-800 rounded-xl p-3.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-sans"
+          ></textarea>
+        </div>
+
+        <button 
+          type="submit" 
+          class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-indigo-600/30 transition-all flex items-center justify-center gap-2 cursor-pointer"
+        >
+          <i class="fa-solid fa-paper-plane text-xs"></i>
+          <span>Send Message</span>
+        </button>
+      </form>
+    </div>
+
+  </div>
+
+</div>

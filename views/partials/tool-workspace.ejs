@@ -1,0 +1,295 @@
+<% if (typeof tool !== 'undefined' && tool) { %>
+<div class="space-y-6">
+
+  <!-- Breadcrumbs -->
+  <nav class="flex items-center gap-2 text-xs text-slate-400">
+    <a href="/" class="hover:text-white transition-colors">Home</a>
+    <i class="fa-solid fa-chevron-right text-[10px] text-slate-600"></i>
+    <a href="/category/<%= tool.category %>" class="hover:text-white capitalize transition-colors"><%= tool.category.replace('-', ' ') %></a>
+    <i class="fa-solid fa-chevron-right text-[10px] text-slate-600"></i>
+    <span class="text-slate-200 font-medium truncate"><%= tool.name %></span>
+  </nav>
+
+  <!-- Tool Title & Header Card -->
+  <div class="p-6 rounded-3xl glass-panel border border-slate-800 shadow-xl space-y-3">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3.5">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white text-xl shadow-lg shadow-indigo-600/30">
+          <i class="<%= tool.icon || 'fa-solid fa-wrench' %>"></i>
+        </div>
+        <div>
+          <h1 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight"><%= tool.name %></h1>
+          <div class="flex items-center gap-2 mt-0.5">
+            <% (tool.badges || []).forEach(function(badge) { %>
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                <%= badge %>
+              </span>
+            <% }); %>
+            <span class="text-xs text-slate-400 capitalize">• <%= tool.category.replace('-', ' ') %></span>
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-slate-800 text-slate-300">
+              <%= tool.processingType === 'ai' ? '🤖 AI Powered' : (tool.processingType === 'client' ? '⚡ Browser Native' : '⚙️ Deterministic') %>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-3xl">
+      <%= tool.description %>
+    </p>
+  </div>
+
+  <!-- Top Ad Slot Placeholder -->
+  <%- include('./ad-slot', { id: 'tool-top-banner', format: 'small', label: 'Sponsored Placement' }) %>
+
+  <!-- Workspace Grid: Inputs + Output -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    
+    <!-- Input Panel -->
+    <div class="p-5 sm:p-6 rounded-3xl glass-panel border border-slate-800 space-y-4 flex flex-col justify-between">
+      <div class="space-y-4">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+            <i class="fa-solid fa-sliders text-indigo-400"></i> Configure Inputs
+          </span>
+          <div class="flex items-center gap-2">
+            <button 
+              type="button" 
+              id="workspace-sample-btn"
+              onclick="loadSampleData('<%= tool.slug %>')" 
+              class="text-[11px] font-semibold text-indigo-400 hover:text-indigo-300 px-2 py-0.5 rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/20 transition-all flex items-center gap-1 cursor-pointer"
+              title="Load sample demo data"
+            >
+              <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i>
+              <span>Sample Demo</span>
+            </button>
+            <button 
+              type="button" 
+              onclick="clearWorkspaceForm()" 
+              class="text-[11px] font-semibold text-slate-400 hover:text-slate-200 px-2 py-0.5 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 transition-all flex items-center gap-1 cursor-pointer"
+              title="Clear input fields"
+            >
+              <i class="fa-solid fa-rotate-left text-[10px]"></i>
+              <span>Clear</span>
+            </button>
+          </div>
+        </div>
+
+        <form id="tool-workspace-form" data-slug="<%= tool.slug %>" data-processing="<%= tool.processingType %>" class="space-y-4">
+          <% (tool.inputs || []).forEach(function(input) { %>
+            <div class="space-y-1.5 input-field-wrapper" data-input-name="<%= input.name %>">
+              <label class="block text-xs font-semibold text-slate-300">
+                <%= input.label %>
+                <% if (input.required) { %><span class="text-rose-400">*</span><% } %>
+              </label>
+
+              <% if (input.type === 'textarea') { %>
+                <textarea 
+                  name="<%= input.name %>" 
+                  id="input-<%= input.name %>"
+                  rows="<%= input.rows || 4 %>" 
+                  placeholder="<%= input.placeholder || '' %>"
+                  class="w-full bg-slate-900 border border-slate-800 rounded-xl p-3 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-sans"
+                ><%= input.default || '' %></textarea>
+              <% } else if (input.type === 'select') { %>
+                <select 
+                  name="<%= input.name %>"
+                  id="input-<%= input.name %>"
+                  class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-indigo-500 transition-all cursor-pointer"
+                >
+                  <% (input.options || []).forEach(function(opt) { %>
+                    <option value="<%= opt %>" <%= (opt === input.default) ? 'selected' : '' %>><%= opt %></option>
+                  <% }); %>
+                </select>
+              <% } else if (input.type === 'file') { %>
+                <div class="border-2 border-dashed border-slate-800 hover:border-indigo-500/50 rounded-2xl p-4 text-center transition-colors">
+                  <input 
+                    type="file" 
+                    id="tool-file-input"
+                    name="<%= input.name %>"
+                    accept="<%= input.accept || '*/*' %>"
+                    class="hidden"
+                  >
+                  <label for="tool-file-input" class="cursor-pointer block space-y-2">
+                    <i class="fa-solid fa-cloud-arrow-up text-2xl text-indigo-400"></i>
+                    <p class="text-xs text-slate-300 font-medium">Click to browse or drag & drop image here</p>
+                    <p class="text-[11px] text-slate-500" id="file-name-preview">Supported formats: JPG, PNG, WebP (Runs 100% in Browser)</p>
+                  </label>
+                </div>
+              <% } else { %>
+                <input 
+                  type="<%= input.type || 'text' %>" 
+                  name="<%= input.name %>" 
+                  id="input-<%= input.name %>"
+                  placeholder="<%= input.placeholder || '' %>"
+                  value="<%= input.default || '' %>"
+                  class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
+                >
+              <% } %>
+            </div>
+          <% }); %>
+
+          <div class="pt-3">
+            <button 
+              type="submit" 
+              id="workspace-execute-btn"
+              class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-indigo-600/30 transition-all flex items-center justify-center gap-2 group cursor-pointer"
+            >
+              <i class="fa-solid fa-play text-xs group-hover:scale-110 transition-transform" id="workspace-btn-icon"></i>
+              <span id="workspace-btn-text">Execute <%= tool.name %></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Output Panel -->
+    <div class="p-5 sm:p-6 rounded-3xl glass-panel border border-slate-800 space-y-4 flex flex-col justify-between">
+      <div class="space-y-3">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+            <i class="fa-solid fa-square-poll-vertical text-emerald-400"></i> Generated Output
+          </span>
+          <div class="flex items-center gap-2">
+            <button 
+              type="button" 
+              id="workspace-copy-btn" 
+              onclick="copyToClipboard('workspace-output-text')" 
+              class="px-3 py-1 text-xs rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors flex items-center gap-1.5 cursor-pointer"
+            >
+              <i class="fa-regular fa-copy" id="workspace-copy-icon"></i>
+              <span id="workspace-copy-text">Copy</span>
+            </button>
+            <button 
+              type="button" 
+              id="workspace-download-btn" 
+              class="hidden px-3 py-1 text-xs rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition-colors flex items-center gap-1.5 cursor-pointer shadow-md"
+            >
+              <i class="fa-solid fa-download"></i>
+              <span>Download</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Text Output Area -->
+        <div class="relative" id="workspace-text-container">
+          <textarea 
+            id="workspace-output-text" 
+            readonly 
+            rows="10" 
+            placeholder="Result will appear here after clicking execute..." 
+            class="w-full bg-slate-950/80 border border-slate-800/80 rounded-2xl p-4 text-xs sm:text-sm font-mono text-emerald-300/90 placeholder-slate-600 focus:outline-none resize-none leading-relaxed"
+          ></textarea>
+        </div>
+
+        <!-- Visual Media Output Container (for QR Code & Image Compressor) -->
+        <div id="workspace-media-container" class="hidden flex flex-col items-center justify-center p-6 bg-slate-950/80 border border-slate-800/80 rounded-2xl min-h-[220px] text-center space-y-4">
+          <div id="workspace-media-preview" class="max-w-full flex justify-center"></div>
+          <div id="workspace-media-info" class="text-xs text-slate-300"></div>
+        </div>
+
+      </div>
+
+      <!-- Action helper bar -->
+      <div class="pt-3 flex items-center justify-between text-xs text-slate-400 border-t border-slate-800/60">
+        <span class="flex items-center gap-1.5" id="workspace-status-indicator">
+          <i class="fa-solid fa-circle-check text-emerald-400"></i> Ready to process
+        </span>
+        <span class="text-[11px] text-slate-400 font-mono" id="workspace-stats-pill">0 characters</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Mid Ad Slot Placeholder (Between Workspace and Guides) -->
+  <%- include('./ad-slot', { id: 'tool-mid-banner', format: 'banner', label: 'Sponsored Recommendation' }) %>
+
+  <!-- Indexable Informational Guide: How It Works & Privacy Architecture -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- How To Use Card -->
+    <div class="p-6 rounded-3xl glass-panel border border-slate-800 space-y-3">
+      <h3 class="text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2">
+        <i class="fa-solid fa-list-check text-indigo-400"></i> How to Use <%= tool.name %>
+      </h3>
+      <ol class="space-y-2.5 text-xs text-slate-300">
+        <li class="flex items-start gap-2.5">
+          <span class="w-5 h-5 rounded-full bg-indigo-500/20 text-indigo-400 font-bold flex items-center justify-center shrink-0 text-[10px]">1</span>
+          <span><strong>Configure Inputs:</strong> Fill in the required fields or click <em class="text-indigo-300 font-semibold">Sample Demo</em> to prefill example data.</span>
+        </li>
+        <li class="flex items-start gap-2.5">
+          <span class="w-5 h-5 rounded-full bg-indigo-500/20 text-indigo-400 font-bold flex items-center justify-center shrink-0 text-[10px]">2</span>
+          <span><strong>Click Execute:</strong> Tap the <em class="text-indigo-300 font-semibold">Execute</em> button to trigger instant processing.</span>
+        </li>
+        <li class="flex items-start gap-2.5">
+          <span class="w-5 h-5 rounded-full bg-indigo-500/20 text-indigo-400 font-bold flex items-center justify-center shrink-0 text-[10px]">3</span>
+          <span><strong>Copy or Download:</strong> Use the one-click <em class="text-emerald-400 font-semibold">Copy</em> or <em class="text-emerald-400 font-semibold">Download</em> action to export your final result.</span>
+        </li>
+      </ol>
+    </div>
+
+    <!-- Transparent Privacy Architecture Card -->
+    <div class="p-6 rounded-3xl glass-panel border border-slate-800 space-y-3">
+      <h3 class="text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2">
+        <i class="fa-solid fa-shield-halved text-emerald-400"></i> Data Privacy & Architecture
+      </h3>
+      <% if (tool.processingType === 'ai') { %>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          <strong class="text-indigo-300">Cloud AI Inference:</strong> Prompts submitted to this tool are transmitted securely over TLS/HTTPS directly to our AI provider cascade (Groq, OpenRouter, Google Gemini) solely to generate the requested output.
+        </p>
+        <p class="text-[11px] text-slate-400 leading-relaxed">
+          We never store, sell, or retain your prompt data. No tracking cookies are used, and zero API credentials are exposed to the client browser.
+        </p>
+      <% } else { %>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          <strong class="text-emerald-400">100% Client-Side Processing:</strong> This tool executes deterministically in your device's browser memory. Your files, calculations, and data payloads are never uploaded, logged, or stored on any remote server.
+        </p>
+        <p class="text-[11px] text-slate-400 leading-relaxed">
+          Fast, completely private, and works offline once the page is loaded.
+        </p>
+      <% } %>
+    </div>
+  </div>
+
+  <!-- Interactive FAQs Section -->
+  <% if (tool.faq && tool.faq.length) { %>
+    <div class="p-6 rounded-3xl glass-panel border border-slate-800 space-y-4">
+      <h3 class="text-base font-bold text-white flex items-center gap-2">
+        <i class="fa-solid fa-circle-question text-indigo-400"></i> Frequently Asked Questions
+      </h3>
+      <div class="divide-y divide-slate-800/80 space-y-2">
+        <% tool.faq.forEach(function(item) { %>
+          <div class="pt-3">
+            <h4 class="text-xs sm:text-sm font-semibold text-slate-200"><%= item.q %></h4>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed"><%= item.a %></p>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  <% } %>
+
+  <!-- Bottom Ad Slot Placeholder (Before Related Tools) -->
+  <%- include('./ad-slot', { id: 'tool-bottom-banner', format: 'rectangle', label: 'Featured Partner' }) %>
+
+  <!-- Related Tools -->
+  <% if (typeof relatedTools !== 'undefined' && relatedTools && relatedTools.length) { %>
+    <div class="space-y-3 pt-4">
+      <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">Related Tools</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <% relatedTools.forEach(function(rel) { %>
+          <a href="/tools/<%= rel.slug %>" class="p-4 rounded-2xl glass-panel tool-card border border-slate-800 block group" onclick="if(window.trackEvent) window.trackEvent('related_tool_click', { target_slug: '<%= rel.slug %>' });">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-sm group-hover:scale-105 transition-transform">
+                <i class="<%= rel.icon || 'fa-solid fa-wrench' %>"></i>
+              </div>
+              <div>
+                <h5 class="text-xs font-bold text-slate-200 group-hover:text-indigo-300 transition-colors"><%= rel.name %></h5>
+                <p class="text-[11px] text-slate-400 line-clamp-1"><%= rel.description %></p>
+              </div>
+            </div>
+          </a>
+        <% }); %>
+      </div>
+    </div>
+  <% } %>
+
+</div>
+<% } %>
