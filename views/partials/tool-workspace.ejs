@@ -18,7 +18,7 @@
           <i class="<%= tool.icon || 'fa-solid fa-wrench' %>"></i>
         </div>
         <div>
-          <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight"><%= tool.name %></h1>
+          <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight"><%= tool.seo?.h1 || tool.name %></h1>
           <div class="flex items-center gap-2 mt-0.5">
             <% (tool.badges || []).forEach(function(badge) { %>
               <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/20">
@@ -48,9 +48,9 @@
     <div class="p-5 sm:p-6 rounded-3xl glass-panel border border-slate-800 space-y-4 flex flex-col justify-between">
       <div class="space-y-4">
         <div class="flex items-center justify-between pb-2 border-b border-slate-800">
-          <span class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
             <i class="fa-solid fa-sliders text-indigo-400"></i> Configure Inputs
-          </span>
+          </h2>
           <div class="flex items-center gap-2">
             <button 
               type="button" 
@@ -146,9 +146,9 @@
     <div class="p-5 sm:p-6 rounded-3xl glass-panel border border-slate-800 space-y-4 flex flex-col justify-between">
       <div class="space-y-3">
         <div class="flex items-center justify-between pb-2 border-b border-slate-800">
-          <span class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
             <i class="fa-solid fa-square-poll-vertical text-emerald-400"></i> Generated Output
-          </span>
+          </h2>
           <div class="flex items-center gap-2">
             <button 
               type="button" 
@@ -203,13 +203,45 @@
   <!-- Mid Ad Slot Placeholder (Between Workspace and Guides) -->
   <%- include('./ad-slot', { id: 'tool-mid-banner', format: 'banner', label: 'Sponsored Recommendation' }) %>
 
+  <!-- Common Use Cases & Real-World Examples -->
+  <% if (tool.useCases && tool.useCases.length) { %>
+    <div class="p-6 rounded-3xl glass-panel border border-slate-200 dark:border-slate-800 space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-lightbulb text-amber-500"></i> Common Use Cases & Examples
+        </h2>
+        <span class="text-[11px] text-slate-500 dark:text-slate-400 font-medium hidden sm:inline">Real-world applications</span>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <% tool.useCases.forEach(function(uc) {
+             var ucTitle = typeof uc === 'string' ? (uc.indexOf(':') !== -1 ? uc.split(':')[0].trim() : 'Application') : (uc.title || 'Application');
+             var ucDesc = typeof uc === 'string' ? (uc.indexOf(':') !== -1 ? uc.substring(uc.indexOf(':') + 1).trim() : uc) : (uc.description || '');
+             var ucExample = typeof uc === 'object' ? uc.example : null;
+        %>
+          <div class="p-4 rounded-2xl bg-slate-50/50 dark:bg-slate-900/40 border border-slate-200/80 dark:border-slate-800/80 space-y-1.5">
+            <h3 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+              <i class="fa-solid fa-check text-emerald-500 text-[11px]"></i> <%= ucTitle %>
+            </h3>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed"><%= ucDesc %></p>
+            <% if (ucExample) { %>
+              <div class="mt-2 pt-2 border-t border-slate-200/60 dark:border-slate-800/60">
+                <span class="text-[10px] uppercase font-mono font-bold text-slate-400 tracking-wider">Example:</span>
+                <p class="text-[11px] font-mono text-indigo-700 dark:text-indigo-300 bg-white/60 dark:bg-slate-950/60 p-2 rounded-lg mt-1 border border-slate-200 dark:border-slate-800/60 break-words"><%= ucExample %></p>
+              </div>
+            <% } %>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  <% } %>
+
   <!-- Indexable Informational Guide: How It Works & Privacy Architecture -->
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <!-- How To Use Card -->
     <div class="p-6 rounded-3xl glass-panel border border-slate-200 dark:border-slate-800 space-y-3">
-      <h3 class="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-2">
+      <h2 class="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-2">
         <i class="fa-solid fa-list-check text-indigo-600 dark:text-indigo-400"></i> How to Use <%= tool.name %>
-      </h3>
+      </h2>
       <ol class="space-y-2.5 text-xs text-slate-600 dark:text-slate-300">
         <li class="flex items-start gap-2.5">
           <span class="w-5 h-5 rounded-full bg-indigo-50 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 font-bold flex items-center justify-center shrink-0 text-[10px]">1</span>
@@ -228,9 +260,9 @@
 
     <!-- Transparent Privacy Architecture Card -->
     <div class="p-6 rounded-3xl glass-panel border border-slate-200 dark:border-slate-800 space-y-3">
-      <h3 class="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-2">
+      <h2 class="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-2">
         <i class="fa-solid fa-shield-halved text-emerald-600 dark:text-emerald-400"></i> Data Privacy & Architecture
-      </h3>
+      </h2>
       <% if (tool.processingType === 'ai') { %>
         <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
           <strong class="text-indigo-600 dark:text-indigo-300">Cloud AI Inference:</strong> Prompts submitted to this tool are transmitted securely over TLS/HTTPS directly to our AI provider cascade (Groq, OpenRouter, Google Gemini) solely to generate the requested output.
@@ -252,13 +284,13 @@
   <!-- Interactive FAQs Section -->
   <% if (tool.faq && tool.faq.length) { %>
     <div class="p-6 rounded-3xl glass-panel border border-slate-200 dark:border-slate-800 space-y-4">
-      <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+      <h2 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
         <i class="fa-solid fa-circle-question text-indigo-600 dark:text-indigo-400"></i> Frequently Asked Questions
-      </h3>
+      </h2>
       <div class="divide-y divide-slate-200 dark:divide-slate-800/80 space-y-2">
         <% tool.faq.forEach(function(item) { %>
           <div class="pt-3">
-            <h4 class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-200"><%= item.q %></h4>
+            <h3 class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-200"><%= item.q %></h3>
             <p class="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed"><%= item.a %></p>
           </div>
         <% }); %>
@@ -272,7 +304,7 @@
   <!-- Related Tools -->
   <% if (typeof relatedTools !== 'undefined' && relatedTools && relatedTools.length) { %>
     <div class="space-y-3 pt-4">
-      <h3 class="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-400">Related Tools</h3>
+      <h2 class="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-400">Related Tools</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         <% relatedTools.forEach(function(rel) { %>
           <a href="/tools/<%= rel.slug %>" class="p-4 rounded-2xl glass-panel tool-card border border-slate-200 dark:border-slate-800 block group" onclick="if(window.trackEvent) window.trackEvent('related_tool_click', { target_slug: '<%= rel.slug %>' });">
@@ -281,7 +313,7 @@
                 <i class="<%= rel.icon || 'fa-solid fa-wrench' %>"></i>
               </div>
               <div>
-                <h5 class="text-xs font-bold text-slate-900 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors"><%= rel.name %></h5>
+                <h3 class="text-xs font-bold text-slate-900 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors"><%= rel.name %></h3>
                 <p class="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1"><%= rel.description %></p>
               </div>
             </div>

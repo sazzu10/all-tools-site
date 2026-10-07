@@ -9,6 +9,24 @@ router.get('/', (req, res) => {
   const popularTools = registry.getPopularTools();
   const categories = registry.getCategoriesWithCounts();
 
+  const schemaData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": appConfig.name,
+      "url": appConfig.url,
+      "description": appConfig.description,
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": `${appConfig.url}/?q={search_term_string}`
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ];
+
   res.render('pages/home', {
     title: appConfig.name + ' • Free Online Utilities & Creator Tools',
     metaDescription: appConfig.description,
@@ -17,6 +35,7 @@ router.get('/', (req, res) => {
     tools,
     popularTools,
     categories,
+    schemaData,
     body: null
   });
 });
@@ -37,6 +56,40 @@ router.get('/category/:slug', (req, res) => {
 
   const tools = registry.getToolsByCategory(category.id || category.slug);
 
+  const schemaData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": `${category.name} • Free Online Utilities`,
+      "description": category.description,
+      "url": `${appConfig.url}/category/${slug}`,
+      "hasPart": tools.map(t => ({
+        "@type": "SoftwareApplication",
+        "name": t.name,
+        "description": t.description,
+        "url": `${appConfig.url}/tools/${t.slug}`
+      }))
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": appConfig.url
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": category.name,
+          "item": `${appConfig.url}/category/${slug}`
+        }
+      ]
+    }
+  ];
+
   res.render('pages/category', {
     title: `${category.name} • Free Online Utilities`,
     metaDescription: category.description,
@@ -44,6 +97,7 @@ router.get('/category/:slug', (req, res) => {
     currentPath: `/category/${slug}`,
     category,
     tools,
+    schemaData,
     body: null
   });
 });

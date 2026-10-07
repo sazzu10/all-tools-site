@@ -38,19 +38,35 @@ module.exports = {
   ],
 
   seo: {
-    title: 'Free Hashtag Generator • Viral Instagram, TikTok & YouTube Tags',
-    metaDescription: 'Find trending and relevant hashtags for Instagram, TikTok, and YouTube Shorts. Boost reach and engagement with free AI hashtag generation.',
-    keywords: ['hashtag generator', 'instagram hashtag generator', 'tiktok hashtag finder', 'youtube shorts hashtags', 'trending hashtags']
+    h1: 'Trending Hashtag Generator for Social Media',
+    title: 'Free Hashtag Generator • Trending Instagram, TikTok & YouTube Tags',
+    metaDescription: 'Generate targeted, trending hashtags for Instagram Reels, TikTok, YouTube Shorts, and Twitter/X. Maximize organic reach and engagement with free AI tags.',
+    keywords: ['hashtag generator', 'instagram hashtag generator', 'tiktok hashtag finder', 'youtube shorts hashtags', 'trending hashtags', 'hashtag generator online']
   },
+
+  useCases: [
+    'Instagram Reels Discovery: Identify low-competition and medium-reach niche hashtags that categorize your short-form videos.',
+    'YouTube Shorts Optimization: Select 3 to 5 targeted tags to help the Shorts algorithm categorize your content in topic feeds.',
+    'TikTok FYP Visibility: Combine broad trending hashtags with micro-niche community tags to trigger the For You page.',
+    'Cross-Platform Campaigns: Generate coordinated hashtag bundles for product launches across LinkedIn, Twitter/X, and Instagram.'
+  ],
 
   faq: [
     {
-      q: 'How many hashtags should I use on Instagram Reels?',
-      a: 'Modern recommendation is 3 to 10 highly relevant niche tags rather than 30 generic tags. The algorithm categorizes your content more accurately when tags are specific.'
+      q: 'How many hashtags should I use on Instagram Reels in 2026?',
+      a: 'Current algorithmic best practices recommend 3 to 8 highly specific niche hashtags rather than spamming 30 broad tags.'
     },
     {
-      q: 'Do hashtags work on YouTube Shorts?',
-      a: 'Yes, adding 2 to 4 niche hashtags in the Shorts title or description helps YouTube classify your video in the Shorts recommendation feed.'
+      q: 'Do hashtags still matter for social media reach?',
+      a: 'Yes. Algorithms use hashtags as topic classification signals to identify the exact target audience and recommend your content to interested users.'
+    },
+    {
+      q: 'Can I generate hashtags for different platforms?',
+      a: 'Yes. You can customize tags specifically for Instagram Reels, YouTube Shorts, TikTok, Twitter/X, or LinkedIn.'
+    },
+    {
+      q: 'Are the generated hashtags ready to copy and paste?',
+      a: 'Yes. Click the "Copy" button to copy the entire hashtag bundle with one click directly to your clipboard.'
     }
   ],
 

@@ -40,19 +40,35 @@ module.exports = {
   ],
 
   seo: {
-    title: 'Free YouTube Description Generator • SEO Video Descriptions',
-    metaDescription: 'Create high-ranking YouTube video descriptions with timestamps, social links, and targeted keywords. Free AI generator.',
-    keywords: ['youtube description generator', 'youtube video description maker', 'youtube seo description template', 'youtube chapter generator']
+    h1: 'YouTube Description & Chapters Generator Online',
+    title: 'Free YouTube Description Generator • SEO Templates & Timestamps',
+    metaDescription: 'Create SEO-optimized YouTube video descriptions with timestamps, key takeaways, and calls-to-action. Free AI description generator to boost search rankings.',
+    keywords: ['youtube description generator', 'youtube video description maker', 'youtube seo description template', 'youtube chapter generator', 'youtube description maker']
   },
+
+  useCases: [
+    'Google Key Moments: Format chapter timestamps that enable Google Search to highlight key moments directly in SERPs.',
+    'Video SEO Optimization: Seamlessly integrate primary and secondary keywords into the first 200 characters of description text.',
+    'Channel Growth CTAs: Include clear subscribe links, social handles, and affiliate disclaimers formatted neatly.',
+    'Podcast & Long-form Content: Summarize 30+ minute video discussions with clear chapter segments for audience retention.'
+  ],
 
   faq: [
     {
-      q: 'How long should a YouTube description be?',
-      a: 'The first 200 characters are the most crucial because they appear above the "Show More" fold. The full description can be up to 5,000 characters to provide helpful context and keyword signals.'
+      q: 'Why are the first 2-3 lines of a YouTube description so important?',
+      a: 'The first 200 characters appear above the "Show More" fold on desktop and mobile. This snippet determines search snippet ranking and initial viewer click behavior.'
     },
     {
       q: 'Do timestamps help video rankings?',
       a: 'Yes, timestamps create chapters in the YouTube player and enable Google Search to show key moments directly in search results.'
+    },
+    {
+      q: 'Can I include links and affiliate disclaimers?',
+      a: 'Yes. The generated template reserves clean sections for your social media links, recommended gear, and FTC affiliate disclaimers.'
+    },
+    {
+      q: 'How many keywords should I include in a video description?',
+      a: 'Write naturally around 2-3 primary keywords. Avoid keyword stuffing or pasting tag lists, as YouTube penalizes artificial keyword spam.'
     }
   ],
 

@@ -32,19 +32,35 @@ module.exports = {
   ],
 
   seo: {
-    title: 'Free JSON Formatter & Validator • Beautify & Minify JSON Online',
-    metaDescription: 'Format, validate, and beautify your JSON data online. Fast, secure, and processes directly in your browser without saving any data.',
-    keywords: ['json formatter', 'json beautifier', 'json validator online', 'json prettifier', 'minify json']
+    h1: 'JSON Formatter & Validator Online',
+    title: 'Free JSON Formatter & Validator Online • Pretty Print & Minify JSON',
+    metaDescription: 'Format, validate, beautify, and minify JSON online. Real-time syntax error checking with 100% in-browser client-side privacy. Zero data logged.',
+    keywords: ['json formatter', 'json beautifier', 'json validator online', 'json prettifier', 'minify json', 'pretty print json']
   },
+
+  useCases: [
+    'Debug API Responses: Pinpoint syntax errors, missing commas, and unbalanced brackets in REST API payloads.',
+    'Pretty-Print Raw Code: Format compacted or single-line JSON into readable 2-space, 4-space, or tabbed indentation.',
+    'Minify Production Payloads: Strip whitespace and newlines to shrink JSON payload size for production network requests.',
+    'Validate Configuration Files: Ensure package.json, tsconfig.json, and server configuration files are syntactically valid.'
+  ],
 
   faq: [
     {
       q: 'Is my JSON data sent to a remote server?',
-      a: 'No. This JSON formatter runs securely and deterministically directly in your browser. Your confidential payloads never leave your computer or phone.'
+      a: 'No. This JSON formatter runs securely and deterministically directly in your browser. Your confidential payloads and API tokens never leave your computer or phone.'
     },
     {
-      q: 'Does it detect syntax errors?',
-      a: 'Yes, if your JSON contains missing quotes, trailing commas, or unbalanced brackets, the validator pinpoints the exact line and character.'
+      q: 'How does the validator pinpoint syntax errors?',
+      a: 'Our browser parser evaluates the string structure and provides exact line and character coordinates where JSON syntax rules are violated.'
+    },
+    {
+      q: 'Can I minify JSON for production using this tool?',
+      a: 'Yes. Select "Minify / Compact (0 spaces)" in the indentation options to remove all whitespace and line breaks for lightweight payload transfer.'
+    },
+    {
+      q: 'Can this tool handle large JSON files?',
+      a: 'Yes, it supports payloads up to 500,000 characters with near-instant client-side execution.'
     }
   ],
 

@@ -103,7 +103,7 @@
     <!-- Responsive Tool Cards Grid (High Contrast & Clear Hierarchy) -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
       <% (popularTools || []).forEach(function(tool) { %>
-        <a href="/tools/<%= tool.slug %>" class="p-4 sm:p-5 rounded-2xl sm:rounded-3xl glass-panel tool-card border border-slate-200 dark:border-slate-800 hover:border-indigo-500/80 flex flex-col justify-between group block">
+        <a href="/tools/<%= tool.slug %>" aria-label="Use <%= tool.name %> Online" class="p-4 sm:p-5 rounded-2xl sm:rounded-3xl glass-panel tool-card border border-slate-200 dark:border-slate-800 hover:border-indigo-500/80 flex flex-col justify-between group block">
           <div class="space-y-3">
             <div class="flex items-center justify-between">
               <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-base group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-inner">
@@ -126,7 +126,7 @@
           <div class="pt-3.5 flex items-center justify-between text-xs border-t border-slate-200 dark:border-slate-800/80 mt-3.5">
             <span class="capitalize text-[11px] font-semibold text-slate-500 dark:text-slate-400"><%= tool.category.replace('-', ' ') %></span>
             <span class="px-2.5 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-500/15 group-hover:bg-indigo-600 text-indigo-700 dark:text-indigo-300 group-hover:text-white font-bold text-[11px] transition-all flex items-center gap-1">
-              <span>Open</span>
+              <span>Use Tool</span>
               <i class="fa-solid fa-arrow-right text-[9px] group-hover:translate-x-0.5 transition-transform"></i>
             </span>
           </div>
@@ -183,7 +183,7 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
       <% (tools || []).forEach(function(tool) { %>
-        <a href="/tools/<%= tool.slug %>" class="p-4 sm:p-5 rounded-2xl glass-panel tool-card border border-slate-200 dark:border-slate-800 hover:border-indigo-500/80 flex flex-col justify-between group block">
+        <a href="/tools/<%= tool.slug %>" aria-label="Use <%= tool.name %> Online" class="p-4 sm:p-5 rounded-2xl glass-panel tool-card border border-slate-200 dark:border-slate-800 hover:border-indigo-500/80 flex flex-col justify-between group block">
           <div class="space-y-2.5">
             <div class="flex items-center gap-3">
               <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-sm group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all shrink-0">

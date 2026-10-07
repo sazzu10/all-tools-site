@@ -37,10 +37,18 @@ module.exports = {
   ],
 
   seo: {
-    title: 'Free Image Compressor • Reduce JPG, PNG & WebP Size Online',
-    metaDescription: 'Compress images online for free without losing quality. Fast client-side image optimization for websites, social media, and faster load times.',
-    keywords: ['image compressor', 'compress jpg', 'png compressor', 'reduce image file size', 'optimize images online']
+    h1: 'Free Image Compressor Online (JPG, PNG, WebP)',
+    title: 'Free Image Compressor Online • Reduce JPG, PNG & WebP File Size',
+    metaDescription: 'Compress images online for free without losing quality. Reduce JPG, PNG, and WebP file sizes directly in your browser. 100% private client-side processing.',
+    keywords: ['image compressor', 'compress jpg', 'png compressor', 'reduce image file size', 'optimize images online', 'compress image online']
   },
+
+  useCases: [
+    'Website Speed Optimization: Shrink image assets to boost Core Web Vitals (LCP) and decrease page load times.',
+    'Email Attachment Limits: Compress large photos to fit within standard 10MB to 25MB email attachment caps.',
+    'Social Media Uploads: Optimize photos for Instagram, Twitter/X, and YouTube thumbnail upload specifications.',
+    'Document & Form Uploads: Comply with government and application portal file size caps (e.g. under 1MB or 500KB).'
+  ],
 
   faq: [
     {
@@ -50,6 +58,14 @@ module.exports = {
     {
       q: 'Which image formats are supported?',
       a: 'JPG/JPEG, PNG, and WebP files are supported.'
+    },
+    {
+      q: 'Will compressing my photo cause noticeable blurriness?',
+      a: 'Our balanced compression algorithm strips redundant metadata and optimizes quantization tables, saving up to 80% file size while preserving sharp visuals.'
+    },
+    {
+      q: 'Can I resize pixel dimensions while compressing?',
+      a: 'Yes. You can optionally downscale images to Full HD (1920px), HD (1280px), or Web Standard (800px) directly in the tool.'
     }
   ],
 
