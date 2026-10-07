@@ -10,14 +10,14 @@
     </div>
 
     <!-- Main Headline -->
-    <h1 class="text-2xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight sm:leading-tight">
+    <h1 class="text-2xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight sm:leading-tight">
       All the Tools You Need.<br class="hidden sm:inline">
-      <span class="bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 bg-clip-text text-transparent">
+      <span class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 dark:from-indigo-400 dark:via-purple-300 dark:to-pink-400 bg-clip-text text-transparent">
         Zero Friction. Fast. Free.
       </span>
     </h1>
 
-    <p class="text-xs sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed px-2">
+    <p class="text-xs sm:text-base text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed px-2">
       High-utility generative AI helpers, YouTube SEO optimizers, developer formatters, and measurement calculators. Free forever with zero sign-up required.
     </p>
 
@@ -32,7 +32,7 @@
           placeholder="Search by tool name (e.g. YouTube Title, JSON, QR)..." 
           onclick="openSearchModal()" 
           readonly
-          class="w-full min-h-[48px] bg-slate-900/95 border-2 border-slate-700/80 hover:border-indigo-500 rounded-2xl py-3 pl-11 pr-28 text-xs sm:text-sm text-slate-100 placeholder-slate-400 shadow-xl cursor-pointer transition-all focus:outline-none focus:border-indigo-500"
+          class="w-full min-h-[48px] bg-white dark:bg-slate-900/95 border-2 border-slate-300 dark:border-slate-700/80 hover:border-indigo-500 rounded-2xl py-3 pl-11 pr-28 text-xs sm:text-sm text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 shadow-xl cursor-pointer transition-all focus:outline-none focus:border-indigo-500"
         >
         <button 
           type="button" 
@@ -47,36 +47,36 @@
 
     <!-- Value Prop Pillars (Compact on mobile) -->
     <div class="pt-2 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 max-w-3xl mx-auto text-left">
-      <div class="p-3 sm:p-3.5 rounded-2xl glass-panel border border-slate-800/90 space-y-1 feature-pill">
-        <div class="flex items-center gap-1.5 text-emerald-400 text-xs font-bold">
+      <div class="p-3 sm:p-3.5 rounded-2xl glass-panel border border-slate-200 dark:border-slate-800/90 space-y-1 feature-pill">
+        <div class="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 text-xs font-bold">
           <i class="fa-solid fa-bolt"></i>
           <span>Instant Speed</span>
         </div>
-        <p class="text-[11px] text-slate-300 leading-tight">0ms latency client-side execution</p>
+        <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-tight">0ms latency client-side execution</p>
       </div>
 
-      <div class="p-3 sm:p-3.5 rounded-2xl glass-panel border border-slate-800/90 space-y-1 feature-pill">
-        <div class="flex items-center gap-1.5 text-indigo-400 text-xs font-bold">
+      <div class="p-3 sm:p-3.5 rounded-2xl glass-panel border border-slate-200 dark:border-slate-800/90 space-y-1 feature-pill">
+        <div class="flex items-center gap-1.5 text-indigo-600 dark:text-indigo-400 text-xs font-bold">
           <i class="fa-solid fa-shield-halved"></i>
           <span>100% Private</span>
         </div>
-        <p class="text-[11px] text-slate-300 leading-tight">Zero data retention on device</p>
+        <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-tight">Zero data retention on device</p>
       </div>
 
-      <div class="p-3 sm:p-3.5 rounded-2xl glass-panel border border-slate-800/90 space-y-1 feature-pill">
-        <div class="flex items-center gap-1.5 text-purple-400 text-xs font-bold">
+      <div class="p-3 sm:p-3.5 rounded-2xl glass-panel border border-slate-200 dark:border-slate-800/90 space-y-1 feature-pill">
+        <div class="flex items-center gap-1.5 text-purple-600 dark:text-purple-400 text-xs font-bold">
           <i class="fa-solid fa-network-wired"></i>
           <span>Resilient AI</span>
         </div>
-        <p class="text-[11px] text-slate-300 leading-tight">Cascading multi-provider fallback</p>
+        <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-tight">Cascading multi-provider fallback</p>
       </div>
 
-      <div class="p-3 sm:p-3.5 rounded-2xl glass-panel border border-slate-800/90 space-y-1 feature-pill">
-        <div class="flex items-center gap-1.5 text-amber-400 text-xs font-bold">
+      <div class="p-3 sm:p-3.5 rounded-2xl glass-panel border border-slate-200 dark:border-slate-800/90 space-y-1 feature-pill">
+        <div class="flex items-center gap-1.5 text-amber-600 dark:text-amber-400 text-xs font-bold">
           <i class="fa-solid fa-gift"></i>
           <span>100% Free</span>
         </div>
-        <p class="text-[11px] text-slate-300 leading-tight">No subscriptions or logins</p>
+        <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-tight">No subscriptions or logins</p>
       </div>
     </div>
 
@@ -89,12 +89,12 @@
   <section id="popular" class="space-y-4">
     <div class="flex items-center justify-between pb-1 px-1">
       <div>
-        <h2 class="text-lg sm:text-2xl font-black text-white flex items-center gap-2">
-          <i class="fa-solid fa-fire text-amber-400"></i> Popular Tools
+        <h2 class="text-lg sm:text-2xl font-black text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-fire text-amber-500 dark:text-amber-400"></i> Popular Tools
         </h2>
-        <p class="text-xs sm:text-sm text-slate-300">Most-used utilities across creators and developers</p>
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300">Most-used utilities across creators and developers</p>
       </div>
-      <a href="#all-tools" class="min-h-[44px] flex items-center text-xs font-bold text-indigo-400 hover:text-indigo-300 gap-1.5 group shrink-0">
+      <a href="#all-tools" class="min-h-[44px] flex items-center text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300 gap-1.5 group shrink-0">
         <span>View all 8 tools</span>
         <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
       </a>
@@ -103,29 +103,29 @@
     <!-- Responsive Tool Cards Grid (High Contrast & Clear Hierarchy) -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
       <% (popularTools || []).forEach(function(tool) { %>
-        <a href="/tools/<%= tool.slug %>" class="p-4 sm:p-5 rounded-2xl sm:rounded-3xl glass-panel tool-card border border-slate-800 hover:border-indigo-500/80 flex flex-col justify-between group block">
+        <a href="/tools/<%= tool.slug %>" class="p-4 sm:p-5 rounded-2xl sm:rounded-3xl glass-panel tool-card border border-slate-200 dark:border-slate-800 hover:border-indigo-500/80 flex flex-col justify-between group block">
           <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-indigo-500/15 text-indigo-400 flex items-center justify-center text-base group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-inner">
+              <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-base group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-inner">
                 <i class="<%= tool.icon || 'fa-solid fa-wrench' %>"></i>
               </div>
-              <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-slate-800 text-indigo-300 border border-slate-700/80">
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-indigo-700 dark:text-indigo-300 border border-slate-200 dark:border-slate-700/80">
                 <%= (tool.badges && tool.badges[0]) || 'Free' %>
               </span>
             </div>
             <div>
-              <h3 class="text-sm sm:text-base font-bold text-white group-hover:text-indigo-300 transition-colors">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors">
                 <%= tool.name %>
               </h3>
-              <p class="text-xs text-slate-200 line-clamp-2 mt-1.5 leading-relaxed font-normal">
+              <p class="text-xs text-slate-600 dark:text-slate-200 line-clamp-2 mt-1.5 leading-relaxed font-normal">
                 <%= tool.description %>
               </p>
             </div>
           </div>
 
-          <div class="pt-3.5 flex items-center justify-between text-xs border-t border-slate-800/80 mt-3.5">
-            <span class="capitalize text-[11px] font-semibold text-slate-400"><%= tool.category.replace('-', ' ') %></span>
-            <span class="px-2.5 py-1 rounded-lg bg-indigo-500/15 group-hover:bg-indigo-600 text-indigo-300 group-hover:text-white font-bold text-[11px] transition-all flex items-center gap-1">
+          <div class="pt-3.5 flex items-center justify-between text-xs border-t border-slate-200 dark:border-slate-800/80 mt-3.5">
+            <span class="capitalize text-[11px] font-semibold text-slate-500 dark:text-slate-400"><%= tool.category.replace('-', ' ') %></span>
+            <span class="px-2.5 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-500/15 group-hover:bg-indigo-600 text-indigo-700 dark:text-indigo-300 group-hover:text-white font-bold text-[11px] transition-all flex items-center gap-1">
               <span>Open</span>
               <i class="fa-solid fa-arrow-right text-[9px] group-hover:translate-x-0.5 transition-transform"></i>
             </span>
@@ -138,26 +138,26 @@
   <!-- CATEGORIES GRID -->
   <section id="categories" class="space-y-4">
     <div class="px-1">
-      <h2 class="text-lg sm:text-2xl font-black text-white flex items-center gap-2">
-        <i class="fa-solid fa-shapes text-indigo-400"></i> Explore by Category
+      <h2 class="text-lg sm:text-2xl font-black text-slate-900 dark:text-white flex items-center gap-2">
+        <i class="fa-solid fa-shapes text-indigo-600 dark:text-indigo-400"></i> Explore by Category
       </h2>
-      <p class="text-xs sm:text-sm text-slate-300">9 organized domains tailored for workflow speed</p>
+      <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300">9 organized domains tailored for workflow speed</p>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
       <% (categories || []).forEach(function(cat) { %>
-        <a href="/category/<%= cat.slug %>" class="p-3.5 sm:p-4 rounded-2xl glass-panel tool-card border border-slate-800 hover:border-indigo-500/80 flex items-center gap-3.5 group block min-h-[64px]">
-          <div class="w-11 h-11 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-lg text-indigo-400 group-hover:scale-105 group-hover:bg-indigo-600 group-hover:text-white transition-all shrink-0">
+        <a href="/category/<%= cat.slug %>" class="p-3.5 sm:p-4 rounded-2xl glass-panel tool-card border border-slate-200 dark:border-slate-800 hover:border-indigo-500/80 flex items-center gap-3.5 group block min-h-[64px]">
+          <div class="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-lg text-indigo-600 dark:text-indigo-400 group-hover:scale-105 group-hover:bg-indigo-600 group-hover:text-white transition-all shrink-0">
             <i class="<%= cat.icon || 'fa-solid fa-folder' %>"></i>
           </div>
           <div class="flex-1 min-w-0">
             <div class="flex items-center justify-between">
-              <h3 class="text-sm font-bold text-slate-100 group-hover:text-indigo-300 transition-colors truncate"><%= cat.name %></h3>
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 ml-2 shrink-0">
+              <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors truncate"><%= cat.name %></h3>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 ml-2 shrink-0">
                 <%= cat.toolCount || 0 %>
               </span>
             </div>
-            <p class="text-xs text-slate-300 truncate mt-0.5"><%= cat.description %></p>
+            <p class="text-xs text-slate-600 dark:text-slate-300 truncate mt-0.5"><%= cat.description %></p>
           </div>
         </a>
       <% }); %>
@@ -171,43 +171,43 @@
   <section id="all-tools" class="space-y-4">
     <div class="flex items-center justify-between pb-1 px-1">
       <div>
-        <h2 class="text-lg sm:text-2xl font-black text-white flex items-center gap-2">
-          <i class="fa-solid fa-screwdriver-wrench text-purple-400"></i> All Tools Catalog
+        <h2 class="text-lg sm:text-2xl font-black text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-screwdriver-wrench text-purple-600 dark:text-purple-400"></i> All Tools Catalog
         </h2>
-        <p class="text-xs sm:text-sm text-slate-300">Complete suite of verified utilities and generators</p>
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300">Complete suite of verified utilities and generators</p>
       </div>
-      <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 shrink-0">
+      <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 shrink-0">
         <%= (tools || []).length %> Total Tools
       </span>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
       <% (tools || []).forEach(function(tool) { %>
-        <a href="/tools/<%= tool.slug %>" class="p-4 sm:p-5 rounded-2xl glass-panel tool-card border border-slate-800 hover:border-indigo-500/80 flex flex-col justify-between group block">
+        <a href="/tools/<%= tool.slug %>" class="p-4 sm:p-5 rounded-2xl glass-panel tool-card border border-slate-200 dark:border-slate-800 hover:border-indigo-500/80 flex flex-col justify-between group block">
           <div class="space-y-2.5">
             <div class="flex items-center gap-3">
-              <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-indigo-500/15 text-indigo-400 flex items-center justify-center text-sm group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all shrink-0">
+              <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-sm group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all shrink-0">
                 <i class="<%= tool.icon || 'fa-solid fa-wrench' %>"></i>
               </div>
               <div class="flex-1 min-w-0">
-                <h3 class="text-sm sm:text-base font-bold text-white group-hover:text-indigo-300 transition-colors truncate">
+                <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors truncate">
                   <%= tool.name %>
                 </h3>
-                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                   <%= tool.category.replace('-', ' ') %>
                 </span>
               </div>
             </div>
-            <p class="text-xs text-slate-200 line-clamp-2 leading-relaxed">
+            <p class="text-xs text-slate-600 dark:text-slate-200 line-clamp-2 leading-relaxed">
               <%= tool.description %>
             </p>
           </div>
 
-          <div class="pt-3 border-t border-slate-800/80 mt-3 flex items-center justify-between text-xs">
-            <span class="text-[11px] text-emerald-400 font-bold flex items-center gap-1">
+          <div class="pt-3 border-t border-slate-200 dark:border-slate-800/80 mt-3 flex items-center justify-between text-xs">
+            <span class="text-[11px] text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1">
               <i class="fa-solid fa-check text-[10px]"></i> Free Access
             </span>
-            <span class="px-2.5 py-1 rounded-lg bg-slate-800 group-hover:bg-indigo-600 text-slate-300 group-hover:text-white font-bold text-[11px] transition-all flex items-center gap-1">
+            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 group-hover:bg-indigo-600 text-slate-700 dark:text-slate-300 group-hover:text-white font-bold text-[11px] transition-all flex items-center gap-1">
               <span>Use Tool</span>
               <i class="fa-solid fa-arrow-right text-[9px] group-hover:translate-x-0.5 transition-transform"></i>
             </span>

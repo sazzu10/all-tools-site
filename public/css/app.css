@@ -3,13 +3,13 @@
   --bg-primary: #0b0f19;
   --bg-secondary: #111827;
   --bg-tertiary: #1f2937;
-  --card-bg: rgba(17, 24, 39, 0.75);
-  --card-hover-bg: rgba(30, 41, 59, 0.85);
+  --card-bg: rgba(17, 24, 39, 0.85);
+  --card-hover-bg: rgba(30, 41, 59, 0.95);
   --border-color: #374151;
   --border-subtle: #1f2937;
   --text-primary: #f9fafb;
-  --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
   --accent-primary: #6366f1;
   --accent-hover: #4f46e5;
   --accent-glow: rgba(99, 102, 241, 0.25);
@@ -19,24 +19,46 @@
   --danger: #ef4444;
 }
 
-[data-theme="light"] {
+[data-theme="light"],
+html:not(.dark) {
   --bg-primary: #f8fafc;
   --bg-secondary: #ffffff;
   --bg-tertiary: #f1f5f9;
-  --card-bg: rgba(255, 255, 255, 0.88);
-  --card-hover-bg: rgba(248, 250, 252, 0.95);
-  --border-color: #e2e8f0;
-  --border-subtle: #f1f5f9;
+  --card-bg: #ffffff;
+  --card-hover-bg: #f8fafc;
+  --border-color: #cbd5e1;
+  --border-subtle: #e2e8f0;
   --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
   --accent-primary: #4f46e5;
   --accent-hover: #4338ca;
   --accent-glow: rgba(79, 70, 229, 0.15);
   --success: #059669;
   --success-bg: rgba(5, 150, 105, 0.1);
-  --warning: #d97706;
+  --warning: #b45309;
   --danger: #dc2626;
+}
+
+[data-theme="dark"],
+html.dark {
+  --bg-primary: #0b0f19;
+  --bg-secondary: #111827;
+  --bg-tertiary: #1f2937;
+  --card-bg: rgba(17, 24, 39, 0.85);
+  --card-hover-bg: rgba(30, 41, 59, 0.95);
+  --border-color: #374151;
+  --border-subtle: #1f2937;
+  --text-primary: #f9fafb;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --accent-primary: #6366f1;
+  --accent-hover: #4f46e5;
+  --accent-glow: rgba(99, 102, 241, 0.25);
+  --success: #10b981;
+  --success-bg: rgba(16, 185, 129, 0.12);
+  --warning: #f59e0b;
+  --danger: #ef4444;
 }
 
 html {
@@ -62,7 +84,12 @@ body {
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid var(--border-color);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+[data-theme="light"] .glass-panel,
+html:not(.dark) .glass-panel {
+  box-shadow: 0 2px 12px -2px rgba(0, 0, 0, 0.06), 0 1px 3px 0 rgba(0, 0, 0, 0.04);
 }
 
 .tool-card {
@@ -88,6 +115,149 @@ body {
 }
 .tool-card:hover::before {
   opacity: 1;
+}
+
+/* Systemic Light Theme Card Contrast Overrides (WCAG AAA Compliant) */
+[data-theme="light"] .tool-card h3,
+html:not(.dark) .tool-card h3 {
+  color: #0f172a !important;
+}
+[data-theme="light"] .tool-card:hover h3,
+html:not(.dark) .tool-card:hover h3 {
+  color: #4338ca !important;
+}
+
+[data-theme="light"] .tool-card p,
+html:not(.dark) .tool-card p {
+  color: #334155 !important;
+}
+
+[data-theme="light"] .tool-card .capitalize,
+[data-theme="light"] .tool-card .text-slate-400,
+html:not(.dark) .tool-card .capitalize,
+html:not(.dark) .tool-card .text-slate-400 {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .tool-card .bg-slate-800,
+html:not(.dark) .tool-card .bg-slate-800 {
+  background-color: #f1f5f9 !important;
+  color: #4338ca !important;
+  border-color: #cbd5e1 !important;
+}
+
+[data-theme="light"] .tool-card .border-slate-800,
+[data-theme="light"] .tool-card .border-slate-800\/80,
+html:not(.dark) .tool-card .border-slate-800,
+html:not(.dark) .tool-card .border-slate-800\/80 {
+  border-color: #e2e8f0 !important;
+}
+
+[data-theme="light"] .tool-card .bg-indigo-500\/15,
+html:not(.dark) .tool-card .bg-indigo-500\/15 {
+  background-color: #e0e7ff !important;
+  color: #4338ca !important;
+}
+
+/* Light Theme Typography & Page Headings Contrast */
+[data-theme="light"] h1.text-white,
+[data-theme="light"] h2.text-white,
+[data-theme="light"] h3.text-white,
+html:not(.dark) h1.text-white,
+html:not(.dark) h2.text-white,
+html:not(.dark) h3.text-white {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] p.text-slate-300,
+[data-theme="light"] p.text-slate-200,
+[data-theme="light"] span.text-slate-300,
+[data-theme="light"] span.text-slate-200,
+html:not(.dark) p.text-slate-300,
+html:not(.dark) p.text-slate-200,
+html:not(.dark) span.text-slate-300,
+html:not(.dark) span.text-slate-200 {
+  color: #334155 !important;
+}
+
+[data-theme="light"] .text-slate-400,
+html:not(.dark) .text-slate-400 {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .text-slate-100,
+html:not(.dark) .text-slate-100 {
+  color: #0f172a !important;
+}
+
+/* Light Theme Navigation & Footer */
+[data-theme="light"] header.glass-panel,
+html:not(.dark) header.glass-panel {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-bottom-color: #e2e8f0 !important;
+}
+
+[data-theme="light"] header .text-white,
+html:not(.dark) header .text-white {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] footer,
+html:not(.dark) footer {
+  background-color: #f1f5f9 !important;
+  border-top-color: #cbd5e1 !important;
+  color: #334155 !important;
+}
+
+[data-theme="light"] footer .text-white,
+html:not(.dark) footer .text-white {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] footer a.text-slate-300,
+html:not(.dark) footer a.text-slate-300 {
+  color: #475569 !important;
+}
+
+[data-theme="light"] footer a.text-slate-300:hover,
+html:not(.dark) footer a.text-slate-300:hover {
+  color: #4338ca !important;
+}
+
+/* Light Theme Search Box and Inputs */
+[data-theme="light"] input,
+[data-theme="light"] textarea,
+[data-theme="light"] select,
+html:not(.dark) input,
+html:not(.dark) textarea,
+html:not(.dark) select {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+[data-theme="light"] input::placeholder,
+[data-theme="light"] textarea::placeholder,
+html:not(.dark) input::placeholder,
+html:not(.dark) textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+[data-theme="light"] .bg-slate-900\/95,
+[data-theme="light"] .bg-slate-900,
+html:not(.dark) .bg-slate-900\/95,
+html:not(.dark) .bg-slate-900 {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+/* Light Theme Workspace Output text */
+[data-theme="light"] #workspace-output-text,
+html:not(.dark) #workspace-output-text {
+  background-color: #f8fafc !important;
+  color: #065f46 !important;
+  border-color: #cbd5e1 !important;
 }
 
 /* Feature Badge Pill */
