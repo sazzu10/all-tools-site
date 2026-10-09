@@ -428,6 +428,19 @@ async function runTestSuite() {
       } else {
         recordTest('SEO: Robots.txt Content-Type & Edge Cache Headers', 'FAIL', 'Missing plain text or Cache-Control');
       }
+
+      // 5. Static Public Robots.txt Validation
+      const staticRobotsPath = path.join(__dirname, '..', 'public', 'robots.txt');
+      if (fs.existsSync(staticRobotsPath)) {
+        const staticRobots = fs.readFileSync(staticRobotsPath, 'utf8');
+        if (staticRobots.includes('User-agent: *') && staticRobots.includes('Allow: /') && staticRobots.includes('Disallow: /api/') && staticRobots.includes('Sitemap: https://freetoolx.dpdns.org/sitemap.xml')) {
+          recordTest('SEO: Static Public Robots.txt Directives & Sitemap Match', 'PASS', 'public/robots.txt verified matching dynamic router');
+        } else {
+          recordTest('SEO: Static Public Robots.txt Directives & Sitemap Match', 'FAIL', 'Directives or sitemap URL mismatch in public/robots.txt');
+        }
+      } else {
+        recordTest('SEO: Static Public Robots.txt Directives & Sitemap Match', 'FAIL', 'public/robots.txt missing');
+      }
     } else {
       recordTest('SEO: Sitemap & Robots Router Endpoints', 'FAIL', 'Router layers not found');
     }
