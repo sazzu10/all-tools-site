@@ -1,6 +1,11 @@
+const rawUrl = (process.env.SITE_URL || '').trim();
+const siteUrl = (rawUrl && !rawUrl.includes('localhost') && !rawUrl.includes('127.0.0.1'))
+  ? rawUrl.replace(/\/+$/, '')
+  : 'https://olx.dpdns.org';
+
 module.exports = {
   name: process.env.SITE_NAME || 'All Tools',
-  url: process.env.SITE_URL || 'http://localhost:4000',
+  url: siteUrl,
   description: process.env.SITE_DESCRIPTION || 'Free online utilities, creator generators, developer tools, and productivity helpers.',
   port: parseInt(process.env.PORT, 10) || 4000,
   env: process.env.NODE_ENV || 'development',

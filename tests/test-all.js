@@ -102,7 +102,7 @@ async function runTestSuite() {
   try {
     const { formatJson } = require('../services/tools/json-formatter');
     const validRaw = '{"title":"All Tools","version":2,"features":["deterministic","ai"]}';
-    
+
     // Test 2 Spaces
     const res2 = formatJson({ jsonInput: validRaw, indent: '2 Spaces' });
     if (res2.ok && res2.valid && res2.output.includes('  "title": "All Tools"')) {
@@ -134,7 +134,7 @@ async function runTestSuite() {
   // Tool 2: Universal Unit Converter
   try {
     const { convertUnits } = require('../services/tools/unit-converter');
-    
+
     // Length Conversion (1 km = 0.62137119 miles)
     const resLen = convertUnits({ dimension: 'Length', amount: 10, fromUnit: 'Kilometers', toUnit: 'Miles' });
     if (resLen.ok && Math.abs(resLen.outputValue - 6.21371192) < 0.001) {
@@ -215,7 +215,7 @@ async function runTestSuite() {
       OPENROUTER_API_KEY: Boolean(process.env.OPENROUTER_API_KEY),
       GEMINI_API_KEY: Boolean(process.env.GEMINI_API_KEY)
     };
-    recordTest('Environment Variables Existence Check (Safe / No Exposure)', 'PASS', 
+    recordTest('Environment Variables Existence Check (Safe / No Exposure)', 'PASS',
       `Groq: ${envStatus.GROQ_API_KEY ? 'Present' : 'Not Set'}, OpenRouter: ${envStatus.OPENROUTER_API_KEY ? 'Present' : 'Not Set'}, Gemini: ${envStatus.GEMINI_API_KEY ? 'Present' : 'Not Set'}`
     );
 
@@ -341,6 +341,98 @@ async function runTestSuite() {
     }
   } catch (err) {
     recordTest('Monetization & AdSense Verification', 'FAIL', err.message);
+  }
+
+  // STEP 8: SEO, SITEMAP & ROBOTS.TXT INTEGRITY CHECKS
+  console.log('\n--- Step 8: SEO, Sitemap & Robots.txt Integrity Checks ---');
+  try {
+    const appConfig = require('../config/app');
+
+    // 1. Base URL verification
+    if (appConfig.url && !appConfig.url.includes('localhost') && !appConfig.url.includes('127.0.0.1') && appConfig.url.startsWith('https://olx.dpdns.org')) {
+      recordTest('SEO: Canonical App URL Configuration', 'PASS', `Configured URL: ${appConfig.url}`);
+    } else {
+      recordTest('SEO: Canonical App URL Configuration', 'FAIL', `Invalid appConfig.url: ${appConfig.url}`);
+    }
+
+    // 2. Canonical tag fallback in head.ejs
+    const headPath = path.join(__dirname, '..', 'views', 'partials', 'head.ejs');
+    const headContent = fs.readFileSync(headPath, 'utf8');
+    if (!headContent.includes('http://localhost:4000') && headContent.includes('https://olx.dpdns.org')) {
+      recordTest('SEO: Head Canonical Fallback (Zero Localhost)', 'PASS', 'head.ejs verified clean');
+    } else {
+      recordTest('SEO: Head Canonical Fallback (Zero Localhost)', 'FAIL', 'Found localhost:4000 reference in head.ejs');
+    }
+
+    // 3. Sitemap generation & XML validation
+    const routesSeo = require('../routes/seo');
+    let sitemapXml = '';
+    let sitemapHeaders = {};
+    const mockResSitemap = {
+      header: (k, v) => { sitemapHeaders[k.toLowerCase()] = v; },
+      send: (body) => { sitemapXml = body; }
+    };
+
+    const sitemapLayer = routesSeo.stack.find(l => l.route && l.route.path === '/sitemap.xml');
+    const robotsLayer = routesSeo.stack.find(l => l.route && l.route.path === '/robots.txt');
+
+    if (sitemapLayer && robotsLayer) {
+      sitemapLayer.route.stack[0].handle({}, mockResSitemap);
+
+      const hasXmlDecl = sitemapXml.startsWith('<?xml version="1.0" encoding="UTF-8"?>');
+      const hasUrlsetOpen = sitemapXml.includes('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
+      const hasUrlsetClose = sitemapXml.trim().endsWith('</urlset>');
+      const noLocalhostInSitemap = !sitemapXml.includes('localhost') && !sitemapXml.includes('127.0.0.1');
+      const allUrlsProduction = sitemapXml.split('<loc>')
+        .slice(1)
+        .map(s => s.split('</loc>')[0])
+        .every(url => url.startsWith('https://olx.dpdns.org/'));
+
+      const urlCount = (sitemapXml.match(/<loc>/g) || []).length;
+
+      if (hasXmlDecl && hasUrlsetOpen && hasUrlsetClose && noLocalhostInSitemap && allUrlsProduction && urlCount >= 20) {
+        recordTest('SEO: Sitemap XML Schema & Entity Validation', 'PASS', `${urlCount} public URLs, 100% https://olx.dpdns.org`);
+      } else {
+        recordTest('SEO: Sitemap XML Schema & Entity Validation', 'FAIL', `Sitemap invalid or contains localhost. URL count: ${urlCount}`);
+      }
+
+      if (sitemapHeaders['content-type'] && sitemapHeaders['content-type'].includes('application/xml') && sitemapHeaders['cache-control']) {
+        recordTest('SEO: Sitemap Content-Type & Edge Cache Headers', 'PASS', sitemapHeaders['content-type']);
+      } else {
+        recordTest('SEO: Sitemap Content-Type & Edge Cache Headers', 'FAIL', 'Missing XML header or Cache-Control');
+      }
+
+      // 4. Robots.txt generation & validation
+      let robotsTxt = '';
+      let robotsHeaders = {};
+      const mockResRobots = {
+        header: (k, v) => { robotsHeaders[k.toLowerCase()] = v; },
+        send: (body) => { robotsTxt = body; }
+      };
+      robotsLayer.route.stack[0].handle({}, mockResRobots);
+
+      const hasUserAgent = robotsTxt.includes('User-agent: *');
+      const hasAllowAll = robotsTxt.includes('Allow: /');
+      const hasDisallowApi = robotsTxt.includes('Disallow: /api/');
+      const hasProductionSitemap = robotsTxt.includes('Sitemap: https://olx.dpdns.org/sitemap.xml');
+      const noLocalhostInRobots = !robotsTxt.includes('localhost') && !robotsTxt.includes('127.0.0.1');
+
+      if (hasUserAgent && hasAllowAll && hasDisallowApi && hasProductionSitemap && noLocalhostInRobots) {
+        recordTest('SEO: Robots.txt Crawl Directives & API Restriction', 'PASS', 'Allow: /, Disallow: /api/, Sitemap: https://olx.dpdns.org/sitemap.xml');
+      } else {
+        recordTest('SEO: Robots.txt Crawl Directives & API Restriction', 'FAIL', `Robots content invalid: ${robotsTxt}`);
+      }
+
+      if (robotsHeaders['content-type'] && robotsHeaders['content-type'].includes('text/plain') && robotsHeaders['cache-control']) {
+        recordTest('SEO: Robots.txt Content-Type & Edge Cache Headers', 'PASS', robotsHeaders['cache-control']);
+      } else {
+        recordTest('SEO: Robots.txt Content-Type & Edge Cache Headers', 'FAIL', 'Missing plain text or Cache-Control');
+      }
+    } else {
+      recordTest('SEO: Sitemap & Robots Router Endpoints', 'FAIL', 'Router layers not found');
+    }
+  } catch (err) {
+    recordTest('SEO & Sitemap Verification', 'FAIL', err.message);
   }
 
   // SUMMARY REPORT
