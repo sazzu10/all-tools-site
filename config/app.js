@@ -1,7 +1,7 @@
 const rawUrl = (process.env.SITE_URL || '').trim();
 const siteUrl = (rawUrl && !rawUrl.includes('localhost') && !rawUrl.includes('127.0.0.1'))
   ? rawUrl.replace(/\/+$/, '')
-  : 'https://olx.dpdns.org';
+  : 'https://freetoolx.dpdns.org';
 
 module.exports = {
   name: process.env.SITE_NAME || 'All Tools',

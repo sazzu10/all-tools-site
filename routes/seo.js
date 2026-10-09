@@ -7,7 +7,7 @@ const appConfig = require('../config/app');
 function getBaseUrl() {
   let url = (appConfig.url || '').trim();
   if (!url || url.includes('localhost') || url.includes('127.0.0.1')) {
-    url = 'https://olx.dpdns.org';
+    url = 'https://freetoolx.dpdns.org';
   }
   return url.replace(/\/+$/, '');
 }

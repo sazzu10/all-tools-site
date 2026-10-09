@@ -349,7 +349,7 @@ async function runTestSuite() {
     const appConfig = require('../config/app');
 
     // 1. Base URL verification
-    if (appConfig.url && !appConfig.url.includes('localhost') && !appConfig.url.includes('127.0.0.1') && appConfig.url.startsWith('https://olx.dpdns.org')) {
+    if (appConfig.url && !appConfig.url.includes('localhost') && !appConfig.url.includes('127.0.0.1') && appConfig.url.startsWith('https://freetoolx.dpdns.org')) {
       recordTest('SEO: Canonical App URL Configuration', 'PASS', `Configured URL: ${appConfig.url}`);
     } else {
       recordTest('SEO: Canonical App URL Configuration', 'FAIL', `Invalid appConfig.url: ${appConfig.url}`);
@@ -358,7 +358,7 @@ async function runTestSuite() {
     // 2. Canonical tag fallback in head.ejs
     const headPath = path.join(__dirname, '..', 'views', 'partials', 'head.ejs');
     const headContent = fs.readFileSync(headPath, 'utf8');
-    if (!headContent.includes('http://localhost:4000') && headContent.includes('https://olx.dpdns.org')) {
+    if (!headContent.includes('http://localhost:4000') && headContent.includes('https://freetoolx.dpdns.org')) {
       recordTest('SEO: Head Canonical Fallback (Zero Localhost)', 'PASS', 'head.ejs verified clean');
     } else {
       recordTest('SEO: Head Canonical Fallback (Zero Localhost)', 'FAIL', 'Found localhost:4000 reference in head.ejs');
@@ -386,12 +386,12 @@ async function runTestSuite() {
       const allUrlsProduction = sitemapXml.split('<loc>')
         .slice(1)
         .map(s => s.split('</loc>')[0])
-        .every(url => url.startsWith('https://olx.dpdns.org/'));
+        .every(url => url.startsWith('https://freetoolx.dpdns.org/'));
 
       const urlCount = (sitemapXml.match(/<loc>/g) || []).length;
 
       if (hasXmlDecl && hasUrlsetOpen && hasUrlsetClose && noLocalhostInSitemap && allUrlsProduction && urlCount >= 20) {
-        recordTest('SEO: Sitemap XML Schema & Entity Validation', 'PASS', `${urlCount} public URLs, 100% https://olx.dpdns.org`);
+        recordTest('SEO: Sitemap XML Schema & Entity Validation', 'PASS', `${urlCount} public URLs, 100% https://freetoolx.dpdns.org`);
       } else {
         recordTest('SEO: Sitemap XML Schema & Entity Validation', 'FAIL', `Sitemap invalid or contains localhost. URL count: ${urlCount}`);
       }
@@ -414,11 +414,11 @@ async function runTestSuite() {
       const hasUserAgent = robotsTxt.includes('User-agent: *');
       const hasAllowAll = robotsTxt.includes('Allow: /');
       const hasDisallowApi = robotsTxt.includes('Disallow: /api/');
-      const hasProductionSitemap = robotsTxt.includes('Sitemap: https://olx.dpdns.org/sitemap.xml');
+      const hasProductionSitemap = robotsTxt.includes('Sitemap: https://freetoolx.dpdns.org/sitemap.xml');
       const noLocalhostInRobots = !robotsTxt.includes('localhost') && !robotsTxt.includes('127.0.0.1');
 
       if (hasUserAgent && hasAllowAll && hasDisallowApi && hasProductionSitemap && noLocalhostInRobots) {
-        recordTest('SEO: Robots.txt Crawl Directives & API Restriction', 'PASS', 'Allow: /, Disallow: /api/, Sitemap: https://olx.dpdns.org/sitemap.xml');
+        recordTest('SEO: Robots.txt Crawl Directives & API Restriction', 'PASS', 'Allow: /, Disallow: /api/, Sitemap: https://freetoolx.dpdns.org/sitemap.xml');
       } else {
         recordTest('SEO: Robots.txt Crawl Directives & API Restriction', 'FAIL', `Robots content invalid: ${robotsTxt}`);
       }
