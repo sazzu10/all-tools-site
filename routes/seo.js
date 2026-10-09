@@ -69,7 +69,15 @@ router.get('/sitemap.xml', (req, res) => {
 // Dynamic robots.txt
 router.get('/robots.txt', (req, res) => {
   const baseUrl = getBaseUrl();
-  const txt = `User-agent: *
+  const txt = `User-agent: Googlebot
+Allow: /
+Disallow: /api/
+
+User-agent: Google-InspectionTool
+Allow: /
+Disallow: /api/
+
+User-agent: *
 Allow: /
 Disallow: /api/
 
@@ -77,7 +85,7 @@ Sitemap: ${baseUrl}/sitemap.xml
 `;
   res.header('Content-Type', 'text/plain; charset=utf-8');
   res.header('X-Content-Type-Options', 'nosniff');
-  res.header('Cache-Control', 'public, max-age=86400, s-maxage=86400');
+  res.header('Cache-Control', 'public, max-age=300, must-revalidate');
   res.send(txt);
 });
 
